@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: email-service
+
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.zoho.in}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:}
+    password: ${SPRING_MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${SPRING_MAIL_SMTP_AUTH:true}
+          starttls:
+            enable: ${SPRING_MAIL_STARTTLS_ENABLE:true}
+            required: ${SPRING_MAIL_STARTTLS_REQUIRED:true}
+        ssl:
+          trust: ${SPRING_MAIL_SSL_TRUST:smtp.zoho.in}
+
+  # Redis config (Upstash)
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:}
+    ssl: ${SPRING_REDIS_SSL:false}
+
+server:
+  port: ${SERVER_PORT:8089}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+  instance:
+    hostname: ${EUREKA_HOSTNAME:localhost}
+    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${server.port}
